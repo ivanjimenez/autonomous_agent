@@ -10,7 +10,7 @@ from handlers.filter_handler import FilterHandler
 
 async def main():
     """
-        Main metho
+        Main method
     """
     tasks = []
 
@@ -68,5 +68,18 @@ if __name__ == '__main__':
     # schedule_callback(loop)
     try:
         loop.run_until_complete(main())
+    except KeyboardInterrupt as e:
+        print(f"Tasks interrupted {e}")
     finally:
+        # Cancelar todas las tareas que están actualmente en ejecución
+        tasks = asyncio.all_tasks(loop)
+        for task in tasks:
+            task.cancel()
+            # Intentar finalizar las tareas de manera limpia
+            try:
+                loop.run_until_complete(task)
+            except asyncio.CancelledError:
+                print(f"Task {task} was cancelled.")
+        # Finalmente, cerrar el loop
         loop.close()
+        print("Closing event loop correctly")

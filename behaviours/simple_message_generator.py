@@ -20,7 +20,7 @@ class SimpleMessageGenerator(AbstractMessageGenerator):
         self.alphabet = alphabet
         self.message_generated: str = None
 
-    def generate_message(self) -> str:
+    def process_message(self) -> str:
         """
         Generate and return a phrase consisting of two randomly selected words.
 

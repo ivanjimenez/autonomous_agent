@@ -10,7 +10,7 @@ class AbstractMessageGenerator(ABC):
     """
 
     @abstractmethod
-    def generate_message(self) -> str:
+    def process_message(self) -> str:
         """
         Abstract method to generate a message from the provided input.
 

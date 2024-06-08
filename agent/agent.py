@@ -3,14 +3,14 @@ import asyncio
 import random
 import secrets
 from datetime import datetime
-
+from agent.abstract_agent import AbstractAgent
 
 # For modules
-from behaviours.message_generator import MessageGenerator
-from handlers.filter_world import FilterWord
+from behaviours.simple_message_generator import SimpleMessageGenerator
+from handlers.filter_handler import FilterHandler
 
 
-class Agent:
+class Agent(AbstractAgent):
     def __init__(self, name):
         # Init arguments
         self.name = name
@@ -37,24 +37,24 @@ class Agent:
         # Set Agent
         self.other_agent = other_agent
 
-    def register_handle(self, handle: FilterWord):
+    def register_handle(self, handle: FilterHandler):
         # Registiring handle
         self.handle = handle
 
-    def register_behaviour(self, behaviour: MessageGenerator):
+    def register_behaviour(self, behaviour: SimpleMessageGenerator):
         # Registiring behaviour
         self.behaviour = behaviour
 
     async def process_messages(self):
         """Process incoming messages."""
         message = await self.inboxqueue.get()
-        filtered_message = self.handle.filter_word(message)
+        filtered_message = self.handle.find_word(message)
         current_time = datetime.now().strftime('%H:%M:%S.%f')[:-4]
         print(f"{current_time} {self.name} received: {filtered_message}")
 
     async def generate_messages(self):
         """Generate and send messages to the other agent."""
-        message = f"{self.behaviour.print_phrase()} id {secrets.token_hex(5)}"
+        message = f"{self.behaviour.generate_message()} id {secrets.token_hex(5)}"
         message = self.color_line(message)
         current_time = datetime.now().strftime('%H:%M:%S.%f')[:-4]
         print(f"{current_time} {self.name} sending: {message}")

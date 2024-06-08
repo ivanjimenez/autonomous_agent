@@ -4,24 +4,26 @@ import gc
 
 # For agent
 from agent.agent import Agent
-from behaviours.message_generator import MessageGenerator
-from handlers.filter_world import FilterWord
+from behaviours.simple_message_generator import SimpleMessageGenerator
+from handlers.filter_handler import FilterHandler
 
 
 async def main():
     """
         Main metho
     """
+    tasks = []
+
     # Setting behaviour
     behaviour_option = [
         'hello', 'sun', 'world', 'space', 'moon',
         'crypto', 'sky', 'ocean', 'universe'
     ]
-    message_generator = MessageGenerator(alphabet=behaviour_option)
+    message_generator = SimpleMessageGenerator(alphabet=behaviour_option)
 
     # Setting handle
     handle_option = 'hello'
-    filter_word = FilterWord(handle_option)
+    filter_word = FilterHandler(handle_option)
 
     # Creating Agents
     agent1 = Agent('Agent 1')
@@ -43,7 +45,8 @@ async def main():
     task2 = asyncio.create_task(agent2.run())
 
     # Grouping in task list
-    tasks = [task1, task2]
+    tasks.append(task1)
+    tasks.append(task2)
 
     # Run the tasks until they are canceled
     try:
@@ -51,7 +54,19 @@ async def main():
     except asyncio.CancelledError:
         print("Tasks were cancelled")
 
+def callback():
+    print("Callback ejecutado!")
+
+def schedule_callback(loop):
+    loop.call_later(5, callback)  # Ejecutar el callback después de 5 segundos
+
 if __name__ == '__main__':
     # Uncomment to adjust garbage collector thresholds if needed
-    gc.set_threshold(1000, 10, 10)
-    asyncio.run(main(), debug=True)
+    # gc.set_threshold(1000, 10, 10)
+    # asyncio.run(main(), debug=True)
+    loop = asyncio.get_event_loop()
+    # schedule_callback(loop)
+    try:
+        loop.run_until_complete(main())
+    finally:
+        loop.close()

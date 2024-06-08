@@ -1,19 +1,18 @@
-# for asynchronous purposes
+# General modules
 import asyncio
 import random
-import time
+import secrets
 from datetime import datetime
-from asyncio import Queue
-from typing import List
+
+
+# For modules
 from behaviours.message_generator import MessageGenerator
 from handlers.filter_world import FilterWord
-from datetime import datetime
-import secrets
+
 
 class Agent:
-    
-   
     def __init__(self, name):
+        # Init arguments
         self.name = name
         self.outboxqueue = asyncio.Queue()
         self.inboxqueue = asyncio.Queue()
@@ -23,41 +22,47 @@ class Agent:
         self.reset = "\033[0m"
 
     def random_color(self):
-        # Generar valores RGB aleatorios
+        # Generate random RGB values
         r = random.randint(0, 255)
         g = random.randint(0, 255)
         b = random.randint(0, 255)
         return f"\033[38;2;{r};{g};{b}m"
-    
+
     def color_line(self, text):
+        # Color line
         color = self.random_color()
         return f"{color}{text}{self.reset}"
 
     def set_other_agent(self, other_agent):
+        # Set Agent
         self.other_agent = other_agent
 
     def register_handle(self, handle: FilterWord):
+        # Registiring handle
         self.handle = handle
 
-    def register_behaviour(self, behaviour : MessageGenerator):
+    def register_behaviour(self, behaviour: MessageGenerator):
+        # Registiring behaviour
         self.behaviour = behaviour
 
     async def process_messages(self):
-        """
-            process
-        """
+        """Process incoming messages."""
         message = await self.inboxqueue.get()
         filtered_message = self.handle.filter_word(message)
-        print(f'{datetime.now().strftime('%H:%M:%S.%f')[:-4]} {self.name} received: {filtered_message}')          
-    
+        current_time = datetime.now().strftime('%H:%M:%S.%f')[:-4]
+        print(f"{current_time} {self.name} received: {filtered_message}")
+
     async def generate_messages(self):
-        message = f'{self.behaviour.print_phrase()} id {secrets.token_hex(5)}'
+        """Generate and send messages to the other agent."""
+        message = f"{self.behaviour.print_phrase()} id {secrets.token_hex(5)}"
         message = self.color_line(message)
-        print(f'{datetime.now().strftime('%H:%M:%S.%f')[:-4]} {self.name} sending: {message}')
+        current_time = datetime.now().strftime('%H:%M:%S.%f')[:-4]
+        print(f"{current_time} {self.name} sending: {message}")
         await self.other_agent.inboxqueue.put(message)
-        await asyncio.sleep(2)  
+        await asyncio.sleep(2)
 
     async def run(self):
+        """Main loop to generate and process messages."""
         while True:
             await self.generate_messages()
             await self.process_messages()

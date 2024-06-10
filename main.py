@@ -48,10 +48,10 @@ async def main(agent_factory: Callable[[], Tuple[Agent, Agent]]):
 def callback(agent1, agent2):
     # New behaviour and handler
     new_behaviour_option = [
-        'barsa', 'madrid', 'mun', 'mancity', 'liverpool', 'bayern' , 'milan'
+        'barcelona', 'madrid', 'Manchester', 'mancity', 'liverpool', 'bayern' , 'milan'
     ]
     new_message_generator = SimpleMessageGenerator(alphabet=new_behaviour_option)
-    new_handle_option = 'sun'
+    new_handle_option = 'barcelona'
     new_filter_word = FilterHandler(new_handle_option)
 
     # Update agents
@@ -88,8 +88,12 @@ if __name__ == '__main__':
     agent1 = Agent('Agent 1')
     agent2 = Agent('Agent 2')
     
-    def agent_factory() -> Tuple[Agent, Agent]:
-        
+    def agent_factory(
+            
+    ) -> Tuple[Agent, Agent]:
+        """
+        :return: return agents
+        """
         return agent1, agent2
  
     loop = asyncio.get_event_loop()

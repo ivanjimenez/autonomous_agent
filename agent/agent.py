@@ -8,8 +8,8 @@ from helpers.color_text_line import color_line
 import logging
 
 # For modules
-from behaviours.simple_message_generator import SimpleMessageGenerator
-from handlers.filter_handler import FilterHandler
+from behaviours.simple_message_generator import AbstractMessageGenerator
+from handlers.filter_handler import AbstractFilterHandler
 class Agent(AbstractAgent):
 
     logging.basicConfig(
@@ -32,11 +32,11 @@ class Agent(AbstractAgent):
         # Set Agent
         self.other_agent = other_agent
 
-    def register_handle(self, handle: FilterHandler):
+    def register_handle(self, handle: AbstractFilterHandler):
         # Registering handle
         self.handle = handle
 
-    def register_behaviour(self, behaviour: SimpleMessageGenerator):
+    def register_behaviour(self, behaviour: AbstractMessageGenerator):
         # Registering behaviour
         self.behaviour = behaviour
 
@@ -45,7 +45,7 @@ class Agent(AbstractAgent):
         while True: # self.iterations < 700:
             try:
                 message = await self.inboxqueue.get()
-                filtered_message = self.handle.find_word(message)
+                filtered_message = self.handle.run_action(message)
                 # current_time = datetime.now().strftime('%H:%M:%S.%f')[:-4]
                 # print(f"{current_time} {self.name} received: {filtered_message}")
                 logging.info("%s sending: %s", self.name, filtered_message)

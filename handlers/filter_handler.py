@@ -4,9 +4,9 @@ from handlers.abstract_filter_handler import AbstractFilterHandler
 
 @dataclasses.dataclass
 class FilterHandler(AbstractFilterHandler):
-    word_to_filter: str
+    content: str
 
-    def find_word(self, message: str) -> str:
+    def run_action(self, message: str) -> str:
         """
         Print a message indicating whether the word is in the given message.
 
@@ -15,6 +15,6 @@ class FilterHandler(AbstractFilterHandler):
         :return: A formatted string indicating if the word was found or not.
         :rtype: str
         """
-        if self.word_to_filter in message.lower():
+        if self.content in message.lower():
             return f'<FOUND: {message}>'
         return f'<NOT FOUND: {message}>'

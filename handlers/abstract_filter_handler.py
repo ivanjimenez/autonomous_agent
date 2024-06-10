@@ -6,7 +6,7 @@ class AbstractFilterHandler(ABC):
     """
    
     @abstractmethod
-    def find_word(self, message: str) -> str:
+    def run_action(self, message: str) -> str:
         """
         Print a message indicating whether the word is in the given message.
 

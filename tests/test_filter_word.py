@@ -8,12 +8,12 @@ class TestFilterWord(unittest.TestCase):
 
     def test_filter_word_found(self):
         message = "hello world"
-        result = self.filter_word.find_word(message)
+        result = self.filter_word.run_action(message)
         self.assertEqual(result, "<FOUND: hello world>")
 
     def test_filter_word_not_found(self):
         message = "goodbye world"
-        result = self.filter_word.find_word(message)
+        result = self.filter_word.run_action(message)
         self.assertEqual(result, "<NOT FOUND goodbye world>")
 
 if __name__ == '__main__':

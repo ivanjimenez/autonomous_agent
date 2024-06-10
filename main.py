@@ -2,6 +2,10 @@
 import asyncio
 import gc
 import time
+import logging
+import tracemalloc
+import psutil
+import os
 from typing import Callable, Tuple
 
 # For agent
@@ -9,6 +13,25 @@ from agent.agent import Agent
 from behaviours.simple_message_generator import SimpleMessageGenerator
 from handlers.filter_handler import FilterHandler
 
+def collect_statistics():
+        """Collect memory and CPU statistics."""
+        process = psutil.Process(os.getpid())
+        mem_info = process.memory_info()
+        cpu_times = process.cpu_times()
+        io_counters = process.io_counters()
+
+        stats = {
+            "memory_rss": mem_info.rss,  # Resident Set Size
+            "memory_vms": mem_info.vms,  # Virtual Memory Size
+            "cpu_user": cpu_times.user,
+            "cpu_system": cpu_times.system,
+            "io_read_count": io_counters.read_count,
+            "io_write_count": io_counters.write_count,
+            "io_read_bytes": io_counters.read_bytes,
+            "io_write_bytes": io_counters.write_bytes
+        }
+        
+        return stats
 
 async def main(agent_factory: Callable[[], Tuple[Agent, Agent]]):
     """
@@ -69,8 +92,13 @@ def schedule_callback(loop, agent_factory: Callable[[], Tuple[Agent, Agent]]):
 
 if __name__ == '__main__':
     # Uncomment to adjust garbage collector thresholds if needed
-    # gc.set_threshold(1000, 10, 10)
+    # gc.set_threshold(10000, 10, 10)
     # asyncio.run(main(), debug=True)
+
+    init : float = 0
+    end : float = 0
+
+    stats : dict = {}
 
     def set_handler_behaviour()->Tuple[SimpleMessageGenerator, FilterHandler]:
         # Setting behaviour
@@ -100,9 +128,11 @@ if __name__ == '__main__':
     schedule_callback(loop, agent_factory)
     try:
         init = time.time()
+         # Start memory tracking
+        tracemalloc.start()
         loop.run_until_complete(main(agent_factory))
-        end = time.time()
-        print(f"Time: {end - init}")
+       
+       
     except KeyboardInterrupt as e:
         print(f"Tasks interrupted {e}")
     finally:
@@ -117,4 +147,15 @@ if __name__ == '__main__':
                 print(f"Task {task} was cancelled.")
         # Finalmente, cerrar el loop
         loop.close()
-        print("Closing event loop correctly")
+        print("Closing event loop correctly") 
+        end = time.time()
+        print(f"Time: {end - init:.2f} seconds")
+        
+        stats = collect_statistics()
+       
+        # Print memory usage
+        current, peak = tracemalloc.get_traced_memory()
+        logging.info(f"Current memory usage: {current} bytes; Peak: {peak} bytes")
+        logging.info("Statistics: %s", stats)
+        # Stop memory tracking
+        tracemalloc.stop()

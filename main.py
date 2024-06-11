@@ -4,8 +4,6 @@ import gc
 import time
 import logging
 import tracemalloc
-import psutil
-import os
 from typing import Callable, Tuple
 
 # For agent
@@ -13,25 +11,7 @@ from agent.agent import Agent
 from behaviours.simple_message_generator import SimpleMessageGenerator
 from handlers.filter_handler import FilterHandler
 
-def collect_statistics():
-        """Collect memory and CPU statistics."""
-        process = psutil.Process(os.getpid())
-        mem_info = process.memory_info()
-        cpu_times = process.cpu_times()
-        io_counters = process.io_counters()
-
-        stats = {
-            "memory_rss": mem_info.rss,  # Resident Set Size
-            "memory_vms": mem_info.vms,  # Virtual Memory Size
-            "cpu_user": cpu_times.user,
-            "cpu_system": cpu_times.system,
-            "io_read_count": io_counters.read_count,
-            "io_write_count": io_counters.write_count,
-            "io_read_bytes": io_counters.read_bytes,
-            "io_write_bytes": io_counters.write_bytes
-        }
-        
-        return stats
+from helpers.custom_stats import collect_statistics
 
 async def main(agent_factory: Callable[[], Tuple[Agent, Agent]]):
     """
@@ -75,7 +55,7 @@ def callback(agent1, agent2):
     ]
     new_message_generator = SimpleMessageGenerator(alphabet=new_behaviour_option)
     new_handle_option = 'barcelona'
-    new_filter_word = FilterHandler(new_handle_option)
+    new_filter_word = FilterHandler(message=new_handle_option, _type='Word')
 
     # Update agents
     agent1.register_behaviour(new_message_generator)
@@ -87,6 +67,9 @@ def callback(agent1, agent2):
     print("Callback executed! Updated behaviour and handle.")
 
 def schedule_callback(loop, agent_factory: Callable[[], Tuple[Agent, Agent]]):
+    """
+    Callback
+    """
     agent1, agent2 = agent_factory()
     loop.call_later(5, callback, agent1, agent2)  # Ejecutar el callback después de 5 segundos
 
@@ -97,11 +80,12 @@ if __name__ == '__main__':
 
     init : float = 0
     end : float = 0
-
     stats : dict = {}
 
     def set_handler_behaviour()->Tuple[SimpleMessageGenerator, FilterHandler]:
-        # Setting behaviour
+        """
+        Setting behaviour
+        """ 
         behaviour_option = [
             'hello', 'sun', 'world', 'space', 'moon',
             'crypto', 'sky', 'ocean', 'universe'
@@ -110,7 +94,7 @@ if __name__ == '__main__':
 
         # Setting handle
         handle_option = 'hello'
-        filter_word = FilterHandler(handle_option)
+        filter_word = FilterHandler(message=handle_option, _type='Word')
         return message_generator, filter_word
 
     agent1 = Agent('Agent 1')
@@ -155,7 +139,13 @@ if __name__ == '__main__':
        
         # Print memory usage
         current, peak = tracemalloc.get_traced_memory()
-        logging.info(f"Current memory usage: {current} bytes; Peak: {peak} bytes")
-        logging.info("Statistics: %s", stats)
+        log_message = f"""
+        ##################### Some Stats ########################
+        Current memory usage: {current} bytes | Peak: {peak} bytes
+        CPU User: {float(stats.get('cpu_user')) * 100:.2f} % | CPU System {float(stats.get('cpu_system')) * 100:.2f} %
+        IO Read Bytes: {float(stats.get('io_read_bytes')):.2f} | IO Write Bytes: {float(stats.get('io_write_bytes')):.2f}
+        """
+        logging.info(log_message)
+
         # Stop memory tracking
         tracemalloc.stop()

@@ -28,15 +28,23 @@ class Agent(AbstractAgent):
         self.behaviour = None
         self.iterations = 0
 
-    def set_other_agent(self, other_agent):
-        # Set Agent
+    def set_other_agent(self, 
+        other_agent: AbstractAgent
+    )-> None:
+        '''
+        :param: other_agent
+        '''
         self.other_agent = other_agent
 
-    def register_handle(self, handle: AbstractFilterHandler):
+    def register_handle(self, 
+        handle: AbstractFilterHandler
+    )->None:
         # Registering handle
         self.handle = handle
 
-    def register_behaviour(self, behaviour: AbstractMessageGenerator):
+    def register_behaviour(self, 
+        behaviour: AbstractMessageGenerator
+    )-> None:
         # Registering behaviour
         self.behaviour = behaviour
 

@@ -2,7 +2,7 @@ import unittest
 import asyncio
 from agent.agent import Agent
 from handlers.filter_handler import FilterHandler
-from behaviours.simple_message_generator import MessageGenerator
+from behaviours.simple_message_generator import SimpleMessageGenerator
 
 class TestIntegration(unittest.TestCase):
     def setUp(self):
@@ -13,8 +13,8 @@ class TestIntegration(unittest.TestCase):
         self.word = 'hello'
         self.agent1 = Agent('Agent 1')
         self.agent2 = Agent('Agent 2')
-        self.filter_word = FilterHandler(self.word)
-        self.message_generator = MessageGenerator(self.alphabet)
+        self.filter_word = FilterHandler(self.word, _type='Word')
+        self.message_generator = SimpleMessageGenerator(self.alphabet)
 
         self.agent1.register_handle(self.filter_word)
         self.agent1.register_behaviour(self.message_generator)

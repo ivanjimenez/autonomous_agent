@@ -1,7 +1,7 @@
 from typing import List
 import random
 from behaviours.abstract_message_generator import AbstractMessageGenerator
-
+from datetime import datetime
 class SimpleMessageGenerator(AbstractMessageGenerator):
     """
     A simple message generator that randomly selects two words from a provided list.
@@ -17,8 +17,10 @@ class SimpleMessageGenerator(AbstractMessageGenerator):
         :param alphabet: List of words to select from.
         :type alphabet: List[str]
         """
+        super().__init__()
         self.alphabet = alphabet
         self.message_generated: str = None
+
 
     def process_message(self) -> str:
         """

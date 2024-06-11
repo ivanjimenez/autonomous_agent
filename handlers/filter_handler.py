@@ -4,8 +4,13 @@ from handlers.abstract_filter_handler import AbstractFilterHandler
 
 @dataclasses.dataclass
 class FilterHandler(AbstractFilterHandler):
-    content: str
-
+    """
+    Docstring
+    """
+    def __init__(self, message, _type):
+        self._type = _type
+        self.content = message
+      
     def run_action(self, message: str) -> str:
         """
         Print a message indicating whether the word is in the given message.

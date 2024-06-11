@@ -1,5 +1,6 @@
 # General modules
 import asyncio
+from enum import Enum
 import random
 import secrets
 from datetime import datetime
@@ -10,6 +11,7 @@ import logging
 # For modules
 from behaviours.simple_message_generator import AbstractMessageGenerator
 from handlers.filter_handler import AbstractFilterHandler
+
 class SimpleAgent(AbstractAgent):
     """
     Simple Agent
@@ -22,6 +24,7 @@ class SimpleAgent(AbstractAgent):
 
     def __init__(self, name) -> None:
         # Init arguments
+        super().__init__()
         self.name = name
         self.outboxqueue = asyncio.Queue()
         self.inboxqueue = asyncio.Queue()
@@ -76,7 +79,7 @@ class SimpleAgent(AbstractAgent):
                 await self.other_agent.inboxqueue.put(message)
                 await asyncio.sleep(2)
             except asyncio.QueueFull:
-                logging.exception('%s could not send: queue is full', self.name)
+                logging.exception('%s could not send: queue is full')
                 
 
     async def run(self):

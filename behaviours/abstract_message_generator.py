@@ -9,27 +9,6 @@ class AbstractMessageGenerator(ABC):
 
     :cvar ABC: Marks the class as an abstract base class.
     """
-    def __init__(self):
-        """
-        Init attributes
-        """
-        self._state = None
-        self._datetime = datetime.now()
-
-    @property
-    def current_time(self):
-        """
-        Get time
-        """
-        return self._datetime
-    
-    @current_time.setter
-    def current_time(self, new_time)->None:
-        """
-        Set time
-        """
-        self.current_time = new_time
-
     @property
     def state(self)->str:
         """

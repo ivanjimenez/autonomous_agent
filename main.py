@@ -8,6 +8,7 @@ from typing import Callable, Tuple
 
 # For agent
 from agent.simple_agent import SimpleAgent
+from agent.agent_states import AgentStates
 from behaviours.simple_message_generator import SimpleMessageGenerator
 from handlers.filter_handler import FilterHandler
 
@@ -98,8 +99,11 @@ if __name__ == '__main__':
         return message_generator, filter_word
 
     agent1 = SimpleAgent('Agent 1')
+    agent1.state = AgentStates.INIT.name
     agent2 = SimpleAgent('Agent 2')
-    
+    agent2.state = AgentStates.INIT.name
+    logging.info(f"Starting Agents: {agent1.name} - State: {agent1.state} | {agent2.name} - State: {agent2.state}")
+
     def agent_factory(
             
     ) -> Tuple[SimpleAgent, SimpleAgent]:
@@ -114,8 +118,9 @@ if __name__ == '__main__':
         init = time.time()
          # Start memory tracking
         tracemalloc.start()
+        agent1.state = AgentStates.STARTED.name
+        agent2.state = AgentStates.STARTED.name
         loop.run_until_complete(main(agent_factory))
-       
        
     except KeyboardInterrupt as e:
         print(f"Tasks interrupted {e}")

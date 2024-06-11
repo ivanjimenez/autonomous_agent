@@ -58,7 +58,7 @@ class SimpleAgent(AbstractAgent):
         while True: # self.iterations < 700:
             try:
                 message = await self.inboxqueue.get()
-                filtered_message = self.handle.run_action(message)
+                filtered_message = self.handle.run_handle(message)
                 # current_time = datetime.now().strftime('%H:%M:%S.%f')[:-4]
                 # print(f"{current_time} {self.name} received: {filtered_message}")
                 logging.info("%s sending: %s", self.name, filtered_message)

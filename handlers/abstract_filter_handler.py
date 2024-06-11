@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from typing import Any
 
 class AbstractFilterHandler(ABC):
     """
@@ -6,7 +7,7 @@ class AbstractFilterHandler(ABC):
     """
    
     @abstractmethod
-    def run_action(self, message: str) -> str:
+    def run_handle(self, message: Any) -> Any:
         """
         Print a message indicating whether the word is in the given message.
 

@@ -7,13 +7,13 @@ import tracemalloc
 from typing import Callable, Tuple
 
 # For agent
-from agent.agent import Agent
+from agent.simple_agent import SimpleAgent
 from behaviours.simple_message_generator import SimpleMessageGenerator
 from handlers.filter_handler import FilterHandler
 
 from helpers.custom_stats import collect_statistics
 
-async def main(agent_factory: Callable[[], Tuple[Agent, Agent]]):
+async def main(agent_factory: Callable[[], Tuple[SimpleAgent, SimpleAgent]]):
     """
         Main method
     """
@@ -66,7 +66,7 @@ def callback(agent1, agent2):
 
     print("Callback executed! Updated behaviour and handle.")
 
-def schedule_callback(loop, agent_factory: Callable[[], Tuple[Agent, Agent]]):
+def schedule_callback(loop, agent_factory: Callable[[], Tuple[SimpleAgent, SimpleAgent]]):
     """
     Callback
     """
@@ -97,12 +97,12 @@ if __name__ == '__main__':
         filter_word = FilterHandler(message=handle_option, _type='Word')
         return message_generator, filter_word
 
-    agent1 = Agent('Agent 1')
-    agent2 = Agent('Agent 2')
+    agent1 = SimpleAgent('Agent 1')
+    agent2 = SimpleAgent('Agent 2')
     
     def agent_factory(
             
-    ) -> Tuple[Agent, Agent]:
+    ) -> Tuple[SimpleAgent, SimpleAgent]:
         """
         :return: return agents
         """

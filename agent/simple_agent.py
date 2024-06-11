@@ -10,8 +10,10 @@ import logging
 # For modules
 from behaviours.simple_message_generator import AbstractMessageGenerator
 from handlers.filter_handler import AbstractFilterHandler
-class Agent(AbstractAgent):
-
+class SimpleAgent(AbstractAgent):
+    """
+    Simple Agent
+    """
     logging.basicConfig(
         format='%(asctime)s %(levelname)-8s %(message)s',
         level=logging.INFO,

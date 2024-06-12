@@ -5,7 +5,7 @@ import secrets
 from agent.abstract_agent import AbstractAgent
 from helpers.color_text_line import color_line
 
-from behaviours.simple_message_generator import AbstractBehaviour
+from behaviours.simple_message_generator import AbstractMessageGenerator
 from handlers.filter_handler import AbstractHandler
 from helpers.logging_config import setup_logging
 
@@ -43,7 +43,7 @@ class SimpleAgent(AbstractAgent):
         self.handle = handle
 
     def register_behaviour(self, 
-        behaviour: AbstractBehaviour
+        behaviour: AbstractMessageGenerator
     )-> None:
         """
         Registering behaviour
@@ -64,7 +64,7 @@ class SimpleAgent(AbstractAgent):
     async def generate_messages(self):
         """Generate and send messages to the other agent."""
         while True: 
-            message = f"{self.behaviour.use_behaviour()} id {secrets.token_hex(5)}"
+            message = f"{self.behaviour.process_message()} id {secrets.token_hex(5)}"
             message = color_line(message)
             logging.info("%s sending: %s", self.name, message)
             self.iterations += 100

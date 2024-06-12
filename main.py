@@ -77,10 +77,10 @@ def callback(agent1 : SimpleAgent,
     New behaviour and handler
     """
     new_behaviour_option = [
-        'barcelona', 'madrid', 'Manchester', 'mancity', 'liverpool', 'bayern' , 'milan'
+        'Barcelona', 'Madrid', 'Manchester', 'Berlin', 'Liverpool', 'Munich' , 'Milan'
     ]
-    new_message_generator = SimpleMessageGenerator(input_data=new_behaviour_option)
-    new_handle_option = 'barcelona'
+    new_message_generator = SimpleMessageGenerator(new_behaviour_option)
+    new_handle_option = 'Barcelona'
     new_filter_word = FilterHandler(message=new_handle_option)
 
     # Update agents
@@ -122,7 +122,7 @@ if __name__ == '__main__':
             'hello', 'sun', 'world', 'space', 'moon',
             'crypto', 'sky', 'ocean', 'universe'
         ]
-        message_generator = SimpleMessageGenerator(input_data=behaviour_option)
+        message_generator = SimpleMessageGenerator(behaviour_option)
         
         # Setting handle
 

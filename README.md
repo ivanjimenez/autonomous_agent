@@ -7,7 +7,7 @@
 
 - The code is decoupled in agent, behaviours and handlers modules with its respectives Interfaces/Abstract clases
 - Each module has an implementation of an agent, handler or behaviour given in the current challenge.
-- The architecture to run and manage agents is based on asyncrhounous queues (asyncio.queue) and tasks (asyncio).
+- The architecture to run and manage agents is based on asynchronous queues (asyncio.queue) and tasks (asyncio).
 - Not threads or multiprocesses are used, but these options could be used in the future to take advantage of multicore/multiprocess arquitectures. 
 - `simple_agent.py` works with the AbstractClasses to decouple any implementation. 
 - `main.py` is the main point to run the application. I think there are comments in each module but I would make some explanations in RUN section
@@ -18,7 +18,7 @@
 * Two agents are running in asynchronous tasks.
 
 * Every message create has the following format:
-    - <date> <loglevel> <agent_name> <sending/receiven> <message> id <unique_id>
+    - <date_time> <log_level> <agent_name> <sending/receiven> <message> id <unique_id>
 * Unique id is created when a message is generated and after is sent to the queue. The other agente receives the 
 message and print it. **This is because the output is showed clearly and any message are checekd if it is lost or wrong/not sent/not received**.
 

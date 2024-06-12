@@ -1,4 +1,18 @@
-"""Main module for testing purposes"""
+"""
+Main module
+WARNING: This module requires improvements and optimizations. It only just used for testing purposes 
+and show the running flow of the challenge.
+
+This module contains:
+- Main method to run agent instances asynchronously
+- Inbox and Outbox messages are showed in stdout with colors. 
+- Each message has an unique id to follow the execution
+- A callback that is called with an event in 5 seconds to update handle and behaviour to 
+new configurations and seeing in the stdout while agents are running. This shows how can be managed a
+state change in the agents to performe a modification in the handle or/and behaviour 
+- Running tasks can be canceled with CTRL+C combination and you will see the stats about
+time execution, memory, cpu and I/O. 
+"""
 import asyncio
 import gc
 import time
@@ -82,10 +96,10 @@ def schedule_callback(loop,
                       agent_factory: Callable[[], Tuple[SimpleAgent, SimpleAgent]]
 )-> None:
     """
-    Callback
+    Callback is called in 10 seconds once
     """
     agent1, agent2 = agent_factory()
-    loop.call_later(5, callback, agent1, agent2)  # Ejecutar el callback después de 5 segundos
+    loop.call_later(10, callback, agent1, agent2)  
 
 if __name__ == '__main__':
     # Uncomment to adjust garbage collector thresholds if needed

@@ -1,35 +1,37 @@
 import unittest
-import logging
 from unittest.mock import MagicMock
-import asyncio
-from agent.simple_agent import SimpleAgent
-from behaviours.simple_message_generator import SimpleMessageGenerator
 from handlers.filter_handler import FilterHandler
+from behaviours.simple_message_generator import SimpleMessageGenerator
 
-class TestAgent(unittest.TestCase):
+class TestHandlersAndBehaviours(unittest.TestCase):
+    def test_filter_handler(self):
+        # Crear una instancia del manejador
+        handler = FilterHandler("hello")
 
-    def setUp(self):
-        self.agent = SimpleAgent('TestAgent')
-        self.other_agent = MagicMock()
-        self.message_generator = MagicMock(spec=SimpleMessageGenerator)
-        self.filter_handler = MagicMock(spec=FilterHandler)
+        # Verificar que el manejador se crea correctamente
+        self.assertIsInstance(handler, FilterHandler)
+        self.assertEqual(handler.content, "hello")
 
-    def test_set_other_agent(self):
-        self.agent.set_other_agent(self.other_agent)
-        self.assertEqual(self.agent.other_agent, self.other_agent)
-        print("Se ha configurado correctamente el otro agente.")
+        # Verificar que el manejador devuelve los resultados esperados
+        self.assertEqual(handler.run_handle("hello world"), "<FOUND: hello world>")
+        self.assertEqual(handler.run_handle("sun sky"), "<NOT FOUND: sun sky>")
 
-    def test_register_handle(self):
-        self.agent.register_handle(self.filter_handler)
-        self.assertEqual(self.agent.handle, self.filter_handler)
-        logging.info("Se ha registrado correctamente el manejador.")
+    def test_simple_message_generator(self):
+        # Crear una instancia del comportamiento
+        behaviour = SimpleMessageGenerator(["hello", "sun", "world", "sky"])
 
-    def test_register_behaviour(self):
-        self.agent.register_behaviour(self.message_generator)
-        self.assertEqual(self.agent.behaviour, self.message_generator)
-        print("Se ha registrado correctamente el comportamiento.")
+        # Verificar que el comportamiento se crea correctamente
+        self.assertIsInstance(behaviour, SimpleMessageGenerator)
+        self.assertEqual(behaviour.input_data, ["hello", "sun", "world", "sky"])
 
-    # Add more unit tests as needed
+        # Verificar que el comportamiento genera mensajes correctamente
+        msg = behaviour.use_behaviour()
+        self.assertEqual(len(msg.split()), 2)
+
+        alphabet = ["hello", "sun", "world", "sky"]
+        word1, word2 = msg.split()
+        self.assertIn(word1, alphabet)
+        self.assertIn(word2, alphabet)
 
 if __name__ == '__main__':
-    unittest.main(verbosity=2)
+    unittest.main()

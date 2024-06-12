@@ -29,43 +29,43 @@ class SimpleAgent(AbstractAgent):
     def set_other_agent(self, 
         other_agent: AbstractAgent
     )-> None:
-        '''
+        """
         :param: other_agent
-        '''
+        """
         self.other_agent = other_agent
 
     def register_handle(self, 
         handle: AbstractHandler
     )->None:
-        # Registering handle
+        """
+         Registering handle
+        """
         self.handle = handle
 
     def register_behaviour(self, 
         behaviour: AbstractBehaviour
     )-> None:
-        # Registering behaviour
+        """
+        Registering behaviour
+        """
         self.behaviour = behaviour
 
     async def process_messages(self):
         """Process incoming messages."""
-        while True: # self.iterations < 700:
+        while True: 
             try:
                 message = await self.inboxqueue.get()
                 filtered_message = self.handle.run_handle(message)
-                # current_time = datetime.now().strftime('%H:%M:%S.%f')[:-4]
-                # print(f"{current_time} {self.name} received: {filtered_message}")
-                logging.info("%s sending: %s", self.name, filtered_message)
+                logging.info("%s receiving: %s", self.name, filtered_message)
                 self.iterations += 1
             except asyncio.QueueEmpty:
                 await asyncio.sleep(0.1) 
 
     async def generate_messages(self):
         """Generate and send messages to the other agent."""
-        while True: #self.iterations < 700:
+        while True: 
             message = f"{self.behaviour.use_behaviour()} id {secrets.token_hex(5)}"
             message = color_line(message)
-            # current_time = datetime.now().strftime('%H:%M:%S.%f')[:-4]
-            # print(f"{current_time} {self.name} sending: {message}")
             logging.info("%s sending: %s", self.name, message)
             self.iterations += 100
             try:

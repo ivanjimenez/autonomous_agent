@@ -16,10 +16,12 @@
 
 * Just execute main.py: `python main.py` (a console output is provided below)
 * Two agents are running in asynchronous tasks.
+
 * Every message create has the following format:
     - <date> <loglevel> <agent_name> <sending/receiven> <message> id <unique_id>
 * Unique id is created when a message is generated and after is sent to the queue. The other agente receives the 
-message and print it. **This is because the output is showed clearly and you can test any message is lost or wrong**.
+message and print it. **This is because the output is showed clearly and any message are checekd if it is lost or wrong/not sent/not received**.
+
 * There is a callback called in 10 seconds once. This is because I want to demonstrate that handle or/and 
 behaviours could be updated in agents while they are running without cancelling tasks or creating new instances.
 * In the example below you can see the behaviour/handle given in the current challenge and after the callback is called, behaviour/handle are setted to new values. You can pass any implementation of handle/behaviour.
@@ -127,5 +129,6 @@ Callback executed! Updated behaviour and handle.
 
 ### Improvements
 
-- Task Runner Class
-- Thread Executor
+- To create a Task Runner Class
+- To create Thread Executor/Multiprocessing to take advantage of multicore architectures.
+- To improve unit/integration tests. 

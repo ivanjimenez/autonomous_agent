@@ -18,42 +18,59 @@
 * Two agents are running in asynchronous tasks.
 
 * Every message create has the following format:
-    - <date_time> <log_level> <agent_name> <sending/receiven> <message> id <unique_id>
+    - <date_time> <log_level> <agent_name> <sending/received> <message> id <unique_id>
 * Unique id is created when a message is generated and after is sent to the queue. The other agente receives the 
-message and print it. **This is because the output is showed clearly and any message are checekd if it is lost or wrong/not sent/not received**.
+message and print it. **This is because the output is showed clearly and any message are checked if it is lost or wrong/not sent/not received**.
 
-* There is a callback called in 10 seconds once. This is because I want to demonstrate that handle or/and 
-behaviours could be updated in agents while they are running without cancelling tasks or creating new instances.
+* There is a callback called in 10 seconds once. **This is because I want to demonstrate that handle or/and 
+behaviours could be updated in agents while they are running without cancelling tasks or creating new instances.**
+
+* Also, coloured messages help to identificate sent/received messages.
+
 * In the example below you can see the behaviour/handle given in the current challenge and after the callback is called, behaviour/handle are setted to new values. You can pass any implementation of handle/behaviour.
 
 ```bash
-2024-06-12 13:01:50 INFO     Agent 1 sending: ocean ocean id e76dad6fb0
-2024-06-12 13:01:50 INFO     Agent 2 sending: ocean ocean id 34f096c2b3
-2024-06-12 13:01:50 INFO     Agent 2 receiving: <NOT FOUND: ocean ocean id e76dad6fb0>
-2024-06-12 13:01:50 INFO     Agent 1 receiving: <NOT FOUND: ocean ocean id 34f096c2b3>
-2024-06-12 13:01:52 INFO     Agent 1 sending: sun hello id 2dd827df6f
-2024-06-12 13:01:52 INFO     Agent 2 sending: universe world id 842b0317da
-2024-06-12 13:01:52 INFO     Agent 2 receiving: <FOUND: sun hello id 2dd827df6f>
-2024-06-12 13:01:52 INFO     Agent 1 receiving: <NOT FOUND: universe world id 842b0317da>
-2024-06-12 13:01:54 INFO     Agent 1 sending: moon hello id e1dfa52338
-2024-06-12 13:01:54 INFO     Agent 2 sending: sun space id ad33c29c2d
-2024-06-12 13:01:54 INFO     Agent 2 receiving: <FOUND: moon hello id e1dfa52338>
-2024-06-12 13:01:54 INFO     Agent 1 receiving: <NOT FOUND: sun space id ad33c29c2d>
-2024-06-12 13:01:56 INFO     Agent 1 sending: universe space id 924f809d98
-2024-06-12 13:01:56 INFO     Agent 2 sending: sun moon id 0d5b1362c3
-2024-06-12 13:01:56 INFO     Agent 2 receiving: <NOT FOUND: universe space id 924f809d98>
-2024-06-12 13:01:56 INFO     Agent 1 receiving: <NOT FOUND: sun moon id 0d5b1362c3>
-2024-06-12 13:01:59 INFO     Agent 1 sending: universe ocean id 15ee49fbb3
-2024-06-12 13:01:59 INFO     Agent 2 sending: moon sun id cbd1f0ec45
-2024-06-12 13:01:59 INFO     Agent 2 receiving: <NOT FOUND: universe ocean id 15ee49fbb3>
-2024-06-12 13:01:59 INFO     Agent 1 receiving: <NOT FOUND: moon sun id cbd1f0ec45>
+2024-06-12 13:53:55 INFO     Agent 1 sending: moon moon id 00aa462810
+2024-06-12 13:53:55 INFO     Agent 2 sending: world universe id 0072163de4
+2024-06-12 13:53:55 INFO     Agent 2 receiving: <NOT FOUND: moon moon id 00aa462810>
+2024-06-12 13:53:55 INFO     Agent 1 receiving: <NOT FOUND: world universe id 0072163de4>
+2024-06-12 13:53:57 INFO     Agent 1 sending: universe hello id 3a5e274621
+2024-06-12 13:53:57 INFO     Agent 2 sending: crypto world id 5952506b86
+2024-06-12 13:53:57 INFO     Agent 2 receiving: <FOUND: universe hello id 3a5e274621>
+2024-06-12 13:53:57 INFO     Agent 1 receiving: <NOT FOUND: crypto world id 5952506b86>
+2024-06-12 13:53:59 INFO     Agent 1 sending: hello ocean id c29a90be2a
+2024-06-12 13:53:59 INFO     Agent 2 sending: sun sky id aaa6b7faa7
+2024-06-12 13:53:59 INFO     Agent 2 receiving: <FOUND: hello ocean id c29a90be2a>
+2024-06-12 13:53:59 INFO     Agent 1 receiving: <NOT FOUND: sun sky id aaa6b7faa7>
+2024-06-12 13:54:01 INFO     Agent 1 sending: ocean moon id 59d4a8e45f
+2024-06-12 13:54:01 INFO     Agent 2 sending: hello universe id 951272e499
+2024-06-12 13:54:01 INFO     Agent 2 receiving: <NOT FOUND: ocean moon id 59d4a8e45f>
+2024-06-12 13:54:01 INFO     Agent 1 receiving: <FOUND: hello universe id 951272e499>
+2024-06-12 13:54:03 INFO     Agent 1 sending: ocean ocean id 8aa7552600
+2024-06-12 13:54:03 INFO     Agent 2 sending: sky world id 1f4e5a1a8d
+2024-06-12 13:54:03 INFO     Agent 2 receiving: <NOT FOUND: ocean ocean id 8aa7552600>
+2024-06-12 13:54:03 INFO     Agent 1 receiving: <NOT FOUND: sky world id 1f4e5a1a8d>
 Callback executed! Updated behaviour and handle.
-2024-06-12 13:02:01 INFO     Agent 1 sending: Manchester Milan id f0676d4382
-2024-06-12 13:02:01 INFO     Agent 2 sending: Berlin Liverpool id 6abe9b33d1
-2024-06-12 13:02:01 INFO     Agent 2 receiving: <NOT FOUND: Manchester Milan id f0676d4382>
-2024-06-12 13:02:01 INFO     Agent 1 receiving: <NOT FOUND: Berlin Liverpool id 6abe9b33d1>
-2024-06-12 13:02:03 INFO     Agent 1 sending: Manchester Liverpool id 1e2b18db64
-2024-06-12 13:02:03 INFO     Agent 2 sending: Manchester Milan id 608775691b
+2024-06-12 13:54:05 INFO     Agent 1 sending: Milan Milan id ba80aa3ec4
+2024-06-12 13:54:05 INFO     Agent 2 sending: Munich Berlin id 95d1a83c28
+2024-06-12 13:54:05 INFO     Agent 2 receiving: <NOT FOUND: Milan Milan id ba80aa3ec4>
+2024-06-12 13:54:05 INFO     Agent 1 receiving: <NOT FOUND: Munich Berlin id 95d1a83c28>
+2024-06-12 13:54:07 INFO     Agent 1 sending: Berlin Berlin id 4095cb2d62
+2024-06-12 13:54:07 INFO     Agent 2 sending: Liverpool Liverpool id b45e4d34d9
+2024-06-12 13:54:07 INFO     Agent 2 receiving: <NOT FOUND: Berlin Berlin id 4095cb2d62>
+2024-06-12 13:54:07 INFO     Agent 1 receiving: <NOT FOUND: Liverpool Liverpool id b45e4d34d9>
+2024-06-12 13:54:09 INFO     Agent 1 sending: Madrid Milan id 766fd46ad0
+2024-06-12 13:54:09 INFO     Agent 2 sending: Liverpool Milan id 63f77c7070
+2024-06-12 13:54:09 INFO     Agent 2 receiving: <NOT FOUND: Madrid Milan id 766fd46ad0>
+2024-06-12 13:54:09 INFO     Agent 1 receiving: <NOT FOUND: Liverpool Milan id 63f77c7070>
+2024-06-12 13:54:11 INFO     Agent 1 sending: Liverpool Milan id caa0b3ee84
+2024-06-12 13:54:11 INFO     Agent 2 sending: Munich Liverpool id 512fe07f39
+2024-06-12 13:54:11 INFO     Agent 2 receiving: <NOT FOUND: Liverpool Milan id caa0b3ee84>
+2024-06-12 13:54:11 INFO     Agent 1 receiving: <NOT FOUND: Munich Liverpool id 512fe07f39>
+2024-06-12 13:54:13 INFO     Agent 1 sending: Barcelona Manchester id e0966ba1b3
+2024-06-12 13:54:13 INFO     Agent 2 sending: Milan Manchester id 0b35a2e64d
+2024-06-12 13:54:13 INFO     Agent 2 receiving: <FOUND: Barcelona Manchester id e0966ba1b3>
+2024-06-12 13:54:13 INFO     Agent 1 receiving: <NOT FOUND: Milan Manchester id 0b35a2e64d>
 ```
 
 * Tasks could be stop comfortably and safely in console with CTRL+C keys.

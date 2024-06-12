@@ -9,8 +9,8 @@
 - Each module has an implementation of an agent, handler or behaviour given in the current challenge.
 - The architecture to run and manage agents is based on asyncrhounous queues (asyncio.queue) and tasks (asyncio).
 - Not threads or multiprocesses are used, but these options could be used in the future to take advantage of multicore/multiprocess arquitectures. 
-- 'simple_agent.py'
-- 'main.py' is the main point to run the application. I think there are comments in each module but I would make some explanations in RUN section
+- `simple_agent.py`
+- `main.py` is the main point to run the application. I think there are comments in each module but I would make some explanations in RUN section
 
 ### RUN
 
@@ -18,7 +18,7 @@
 * Two agents are running in asynchronous tasks.
 *
 
-'''
+````bash
 2024-06-12 13:01:50 INFO     Agent 1 sending: ocean ocean id e76dad6fb0
 2024-06-12 13:01:50 INFO     Agent 2 sending: ocean ocean id 34f096c2b3
 2024-06-12 13:01:50 INFO     Agent 2 receiving: <NOT FOUND: ocean ocean id e76dad6fb0>
@@ -46,7 +46,7 @@ Callback executed! Updated behaviour and handle.
 2024-06-12 13:02:01 INFO     Agent 1 receiving: <NOT FOUND: Berlin Liverpool id 6abe9b33d1>
 2024-06-12 13:02:03 INFO     Agent 1 sending: Manchester Liverpool id 1e2b18db64
 2024-06-12 13:02:03 INFO     Agent 2 sending: Manchester Milan id 608775691b
-'''
+```
 
 
 ### Improvements

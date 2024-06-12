@@ -1,8 +1,5 @@
-'''
-Abstract Agent
-''' 
+"""Module with the interface definition of the abstract behaviour."""
 from datetime import datetime
-
 from abc import ABC, abstractmethod
 
 from agent.agent_states import AgentStates
@@ -20,7 +17,7 @@ class AbstractAgent(ABC):
     @property
     def current_time(self):
         """
-        Get time
+        Get time if it is necessario to change some states
         """
         return self.datetime
     

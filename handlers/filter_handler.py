@@ -1,19 +1,27 @@
+"""This module contains the implementation of handle interface."""
 import dataclasses
 
-from handlers.abstract_filter_handler import AbstractFilterHandler
+from handlers.abstract_handler import AbstractHandler
 
 @dataclasses.dataclass
-class FilterHandler(AbstractFilterHandler):
+class FilterHandler(AbstractHandler):
     """
-    Docstring
+    A handler that filters messages based on a specified content.
     """
-    def __init__(self, message, _type):
-        self._type = _type
+    def __init__(self, message):
+        """Content setting"""
         self.content = message
-           
+
     def run_handle(self, message: str) -> str:
         """
-        Print a message indicating whether the word is in the given message.
+        This handler filters messages for the keyword (e.g.: 'hello') and prints the whole
+        message to stdout. 
+
+        For test purposes the message is formatted as <FOUND message> if exists the keyboard and
+        <NOT FOUND message> if not.
+
+        Every message has a 5 characters unique id to see clearly every message as has sent as has 
+        received. No messages lost.
 
         :param message: The message to search within.
         :type message: str

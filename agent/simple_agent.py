@@ -1,27 +1,20 @@
-# General modules
+"""This module contains the implementation of agent interface."""
+import logging
 import asyncio
-from enum import Enum
-import random
 import secrets
-from datetime import datetime
 from agent.abstract_agent import AbstractAgent
 from helpers.color_text_line import color_line
-import logging
 
-# For modules
-from behaviours.simple_message_generator import AbstractMessageGenerator
-from handlers.filter_handler import AbstractFilterHandler
+from behaviours.simple_message_generator import AbstractBehaviour
+from handlers.filter_handler import AbstractHandler
+from helpers.logging_config import setup_logging
 
+# Logging setup
+setup_logging()
 class SimpleAgent(AbstractAgent):
     """
-    Simple Agent
+    This class provides an interface for an Agent
     """
-    logging.basicConfig(
-        format='%(asctime)s %(levelname)-8s %(message)s',
-        level=logging.INFO,
-        datefmt='%Y-%m-%d %H:%M:%S'
-    )
-
     def __init__(self, name) -> None:
         # Init arguments
         super().__init__()
@@ -42,13 +35,13 @@ class SimpleAgent(AbstractAgent):
         self.other_agent = other_agent
 
     def register_handle(self, 
-        handle: AbstractFilterHandler
+        handle: AbstractHandler
     )->None:
         # Registering handle
         self.handle = handle
 
     def register_behaviour(self, 
-        behaviour: AbstractMessageGenerator
+        behaviour: AbstractBehaviour
     )-> None:
         # Registering behaviour
         self.behaviour = behaviour
@@ -69,7 +62,7 @@ class SimpleAgent(AbstractAgent):
     async def generate_messages(self):
         """Generate and send messages to the other agent."""
         while True: #self.iterations < 700:
-            message = f"{self.behaviour.process_message()} id {secrets.token_hex(5)}"
+            message = f"{self.behaviour.use_behaviour()} id {secrets.token_hex(5)}"
             message = color_line(message)
             # current_time = datetime.now().strftime('%H:%M:%S.%f')[:-4]
             # print(f"{current_time} {self.name} sending: {message}")

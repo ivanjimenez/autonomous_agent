@@ -1,35 +1,29 @@
-from typing import List
+"""This module contains the implementation of behaviour interface."""
+from datetime import datetime
+from typing import Any, List
 import random
-from behaviours.abstract_message_generator import AbstractMessageGenerator
+from behaviours.abstract_behaviour import AbstractBehaviour
 
-class SimpleMessageGenerator(AbstractMessageGenerator):
+class SimpleMessageGenerator(AbstractBehaviour):
     """
     A simple message generator that randomly selects two words from a provided list.
 
     :param alphabet: List of words to select from.
     :type alphabet: List[str]
     """
+    def __init__(self,  input_data: List[str])->None:
+        super().__init__(input_data=input_data)
+        self._datetime = datetime.now()
 
-    def __init__(self, alphabet: List[str]):
-        """
-        Initialize the message generator with a list of words.
-
-        :param alphabet: List of words to select from.
-        :type alphabet: List[str]
-        """
-        self.alphabet = alphabet
-        self.message_generated: str = None
-
-
-    def process_message(self) -> str:
+    def use_behaviour(self) -> str:
         """
         Generate and return a phrase consisting of two randomly selected words.
 
         :return: A phrase formed by two randomly selected words.
         :rtype: str
         """
-        msg_result = f'{random.choice(self.alphabet)} {random.choice(self.alphabet)}'
-        self.message_generated = None  # If intended to reset, add explanation in doc
+        msg_result = f'{random.choice(self.input_data)} {random.choice(self.input_data)}'
         return msg_result
 
-        
+    def select_behaviour(self, input_data: List[str]) -> Any:
+        self.input_data = input_data

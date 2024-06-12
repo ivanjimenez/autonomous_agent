@@ -1,8 +1,8 @@
 from typing import List
 import random
-from behaviours.abstract_message_generator import AbstractMessageGenerator
+from behaviours.abstract_behaviour import AbstractBehaviour
 
-class SimpleMessageGenerator(AbstractMessageGenerator):
+class SimpleMessageGenerator(AbstractBehaviour):
     """
     A simple message generator that randomly selects two words from a provided list.
 

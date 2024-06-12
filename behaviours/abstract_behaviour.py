@@ -3,7 +3,7 @@
 from abc import ABC, abstractmethod
 from datetime import datetime
 
-class AbstractMessageGenerator(ABC):
+class AbstractBehaviour(ABC):
     """
     Abstract base class for generating messages based on input parameters.
 

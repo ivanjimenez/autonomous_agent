@@ -5,7 +5,7 @@ import secrets
 from agent.abstract_agent import AbstractAgent
 from helpers.color_text_line import color_line
 
-from behaviours.simple_message_generator import AbstractMessageGenerator
+from behaviours.simple_message_generator import AbstractBehaviour
 from handlers.filter_handler import AbstractHandler
 from helpers.logging_config import setup_logging
 
@@ -43,7 +43,7 @@ class SimpleAgent(AbstractAgent):
         self.handle = handle
 
     def register_behaviour(self, 
-        behaviour: AbstractMessageGenerator
+        behaviour: AbstractBehaviour
     )-> None:
         """
         Registering behaviour

@@ -1,37 +1,44 @@
-# import unittest
-# from unittest.mock import MagicMock
-# from handlers.filter_handler import FilterHandler
-# from behaviours.simple_message_generator import SimpleMessageGenerator
+import unittest
+import logging
+from unittest.mock import MagicMock
+import asyncio
+from agent.simple_agent import SimpleAgent
+from behaviours.simple_message_generator import SimpleMessageGenerator
+from handlers.filter_handler import FilterHandler
 
-# class TestHandlersAndBehaviours(unittest.TestCase):
-#     def test_filter_handler(self):
-#         # Crear una instancia del manejador
-#         handler = FilterHandler("hello")
+class TestAgent(unittest.TestCase):
 
-#         # Verificar que el manejador se crea correctamente
-#         self.assertIsInstance(handler, FilterHandler)
-#         self.assertEqual(handler.content, "hello")
+    def setUp(self):
+        self.agent = SimpleAgent('TestAgent1')
+        self.other_agent = SimpleAgent('TestAgent2')
+        self.message_generator = MagicMock(spec=SimpleMessageGenerator)
+        self.filter_handler = MagicMock(spec=FilterHandler)
 
-#         # Verificar que el manejador devuelve los resultados esperados
-#         self.assertEqual(handler.run_handle("hello world"), "<FOUND: hello world>")
-#         self.assertEqual(handler.run_handle("sun sky"), "<NOT FOUND: sun sky>")
+    def test_connect_both_agents(self):
+        self.agent.set_other_agent(self.other_agent)
+        self.assertEqual(self.agent.other_agent, self.other_agent)
+        logging.info("Configured Agent1 and Agent2.")
 
-#     def test_simple_message_generator(self):
-#         # Crear una instancia del comportamiento
-#         behaviour = SimpleMessageGenerator(["hello", "sun", "world", "sky"])
+    def test_register_handle_agent1(self):
+        self.agent.register_handle(self.filter_handler)
+        self.assertEqual(self.agent.handle, self.filter_handler)
+        logging.info("Agent1 handle configured")
 
-#         # Verificar que el comportamiento se crea correctamente
-#         self.assertIsInstance(behaviour, SimpleMessageGenerator)
-#         self.assertEqual(behaviour.alphabet, ["hello", "sun", "world", "sky"])
+    def test_register_behaviour_agent1(self):
+        self.agent.register_behaviour(self.message_generator)
+        self.assertEqual(self.agent.behaviour, self.message_generator)
+        logging.info("Agent1 behaviour configured")
 
-#         # Verificar que el comportamiento genera mensajes correctamente
-#         msg = behaviour.process_message()
-#         self.assertEqual(len(msg.split()), 2)
+    def test_register_handle_agent2(self):
+        self.other_agent.register_handle(self.filter_handler)
+        self.assertEqual(self.other_agent.handle, self.filter_handler)
+        logging.info("Agent1 handle configured")
 
-#         alphabet = ["hello", "sun", "world", "sky"]
-#         word1, word2 = msg.split()
-#         self.assertIn(word1, alphabet)
-#         self.assertIn(word2, alphabet)
+    def test_register_behaviour_agent2(self):
+        self.other_agent.register_behaviour(self.message_generator)
+        self.assertEqual(self.other_agent.behaviour, self.message_generator)
+        logging.info("Agent2 behaviour configured")
+    
 
-# if __name__ == '__main__':
-#     unittest.main()
+if __name__ == '__main__':
+    unittest.main(verbosity=2)

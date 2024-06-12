@@ -110,7 +110,6 @@ if __name__ == '__main__':
         ]
         message_generator = SimpleMessageGenerator(input_data=behaviour_option)
         
-
         # Setting handle
 
         handle_option = 'hello'

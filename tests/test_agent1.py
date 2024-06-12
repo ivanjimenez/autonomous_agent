@@ -9,27 +9,36 @@ from handlers.filter_handler import FilterHandler
 class TestAgent(unittest.TestCase):
 
     def setUp(self):
-        self.agent = SimpleAgent('TestAgent')
-        self.other_agent = MagicMock()
+        self.agent = SimpleAgent('TestAgent1')
+        self.other_agent = SimpleAgent('TestAgent2')
         self.message_generator = MagicMock(spec=SimpleMessageGenerator)
         self.filter_handler = MagicMock(spec=FilterHandler)
 
-    def test_set_other_agent(self):
+    def test_connect_both_agents(self):
         self.agent.set_other_agent(self.other_agent)
         self.assertEqual(self.agent.other_agent, self.other_agent)
-        print("Se ha configurado correctamente el otro agente.")
+        logging.info("Configured Agent1 and Agent2.")
 
-    def test_register_handle(self):
+    def test_register_handle_agent1(self):
         self.agent.register_handle(self.filter_handler)
         self.assertEqual(self.agent.handle, self.filter_handler)
-        logging.info("Se ha registrado correctamente el manejador.")
+        logging.info("Agent1 handle configured")
 
-    def test_register_behaviour(self):
+    def test_register_behaviour_agent1(self):
         self.agent.register_behaviour(self.message_generator)
         self.assertEqual(self.agent.behaviour, self.message_generator)
-        print("Se ha registrado correctamente el comportamiento.")
+        logging.info("Agent1 behaviour configured")
 
-    # Add more unit tests as needed
+    def test_register_handle_agent2(self):
+        self.other_agent.register_handle(self.filter_handler)
+        self.assertEqual(self.other_agent.handle, self.filter_handler)
+        logging.info("Agent1 handle configured")
+
+    def test_register_behaviour_agent2(self):
+        self.other_agent.register_behaviour(self.message_generator)
+        self.assertEqual(self.other_agent.behaviour, self.message_generator)
+        logging.info("Agent2 behaviour configured")
+    
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)

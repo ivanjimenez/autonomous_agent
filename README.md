@@ -68,7 +68,7 @@ Callback executed! Updated behaviour and handle.
 
     OK
     ```
----
+    ---
     * Integration Test:
     ```
     $ python -m unittest .\tests\test_integration.py         

@@ -108,6 +108,7 @@ Callback executed! Updated behaviour and handle.
     OK
     ```
     ---
+    
     * Integration Test: agent1 and agent2 are instantiated and runned with asyncronous tasks in the event loop. 
     The standard output of these tasks are recorded in `agent_logs.log` for testing purposes. The aim of the test is checking if behaviours and handles are working in real time while agents are sending/receiving messages. The execution of these tasks are limited to 10 secondes and then tasks are cancelled. The file has the output and after FOUND/NOT FOUND are counted to verify handle/behaviour are working.
 

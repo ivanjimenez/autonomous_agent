@@ -1,0 +1,12 @@
+2024-06-12 12:39:35,510 - root - INFO - Agent 1 sending: moon crypto id 80ca47d216
+2024-06-12 12:39:35,510 - root - INFO - Agent 2 sending: moon world id e9bb2ccb02
+2024-06-12 12:39:35,510 - root - INFO - Agent 2 receiving: <NOT FOUND: moon crypto id 80ca47d216>
+2024-06-12 12:39:35,510 - root - INFO - Agent 1 receiving: <NOT FOUND: moon world id e9bb2ccb02>
+2024-06-12 12:39:37,517 - root - INFO - Agent 1 sending: crypto moon id 888e908723
+2024-06-12 12:39:37,517 - root - INFO - Agent 2 sending: space hello id 661c7a2402
+2024-06-12 12:39:37,517 - root - INFO - Agent 2 receiving: <NOT FOUND: crypto moon id 888e908723>
+2024-06-12 12:39:37,517 - root - INFO - Agent 1 receiving: <FOUND: space hello id 661c7a2402>
+2024-06-12 12:39:39,524 - root - INFO - Agent 1 sending: hello sky id 423fca1da5
+2024-06-12 12:39:39,524 - root - INFO - Agent 2 sending: sun moon id d33316294e
+2024-06-12 12:39:39,524 - root - INFO - Agent 2 receiving: <FOUND: hello sky id 423fca1da5>
+2024-06-12 12:39:39,524 - root - INFO - Agent 1 receiving: <NOT FOUND: sun moon id d33316294e>

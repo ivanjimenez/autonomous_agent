@@ -7,10 +7,10 @@ from helpers.color_text_line import color_line
 
 from behaviours.simple_message_generator import AbstractBehaviour
 from handlers.filter_handler import AbstractHandler
-from helpers.logging_config import setup_logging
+from helpers.logging_config import setup_logging, setup_logging_file
 
 # Logging setup
-setup_logging()
+# setup_logging()
 class SimpleAgent(AbstractAgent):
     """
     This class provides an interface for an Agent
@@ -57,9 +57,8 @@ class SimpleAgent(AbstractAgent):
                 message = await self.inboxqueue.get()
                 filtered_message = self.handle.run_handle(message)
                 logging.info("%s receiving: %s", self.name, filtered_message)
-                self.iterations += 1
             except asyncio.QueueEmpty:
-                await asyncio.sleep(0.1) 
+                await asyncio.sleep(0.1) # When Queue has a determined size
 
     async def generate_messages(self):
         """Generate and send messages to the other agent."""
@@ -67,7 +66,6 @@ class SimpleAgent(AbstractAgent):
             message = f"{self.behaviour.process_message()} id {secrets.token_hex(5)}"
             message = color_line(message)
             logging.info("%s sending: %s", self.name, message)
-            self.iterations += 100
             try:
                 await self.other_agent.inboxqueue.put(message)
                 await asyncio.sleep(2)

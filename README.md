@@ -16,7 +16,13 @@
 
 * Just execute main.py: `python main.py` (a console output is provided below)
 * Two agents are running in asynchronous tasks.
-*
+* Every message create has the following format:
+    - <date> <loglevel> <agent_name> <sending/receiven> <message> id <unique_id>
+* Unique id is created when a message is generated and after is sent to the queue. The other agente receives the 
+message and print it. **This is because the output is showed clearly and you can test any message is lost or wrong**.
+* There is a callback called in 10 seconds once. This is because I want to demonstrate that handle or/and 
+behaviours could be updated in agents while they are running without cancelling tasks or creating new instances.
+* In the example below you can see the behaviour/handle given in the current challenge and after the callback is called, behaviour/handle are setted to new values. You can pass any implementation of handle/behaviour.
 
 ```bash
 2024-06-12 13:01:50 INFO     Agent 1 sending: ocean ocean id e76dad6fb0
@@ -48,6 +54,20 @@ Callback executed! Updated behaviour and handle.
 2024-06-12 13:02:03 INFO     Agent 2 sending: Manchester Milan id 608775691b
 ```
 
+* Tasks could be stop comfortably and safely in console with CTRL+C keys.
+* After that you will obtain some performance and time stats.
+* Performance and time stats are calculated when agents are executing. 
+```
+    Closing event loop correctly
+                     Time: 14.86 seconds
+
+    ##################### Some Stats ########################
+    Current memory usage: 9861 bytes | Peak: 38938 bytes
+    CPU User: 7.81 % | CPU System 6.25 %
+    IO Read Bytes: 2689972.00 | IO Write Bytes: 0.00
+```
+ 
+
 ### Tests
 
 - Test framework used for testing: `unittest`
@@ -69,7 +89,10 @@ Callback executed! Updated behaviour and handle.
     OK
     ```
     ---
-    * Integration Test:
+    * Integration Test: agent1 and agent2 are instantiated and runned with asyncronous tasks in the event loop. 
+    The standard output of these tasks are recorded in `agent_logs.log` for testing purposes. The aim of the test is checking if behaviours and handles are working in real time while agents are sending/receiving messages. The execution of these tasks are limited to 10 secondes and then tasks are cancelled. The file has the output and after FOUND/NOT FOUND are counted to verify handle/behaviour are working.
+
+    Sure Tests can be improved to check real scenarios properly. But I think this test could be fine by now. 
     ```
     $ python -m unittest .\tests\test_integration.py         
     #### Starting TEST AGENTS INTEGRATION

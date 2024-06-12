@@ -1,12 +1,4 @@
-2024-06-12 13:20:00,024 - root - INFO - Agent 1 sending: ocean ocean id 5803e91e01
-2024-06-12 13:20:00,024 - root - INFO - Agent 2 sending: space ocean id 41b52c881e
-2024-06-12 13:20:00,025 - root - INFO - Agent 2 receiving: <NOT FOUND: ocean ocean id 5803e91e01>
-2024-06-12 13:20:00,025 - root - INFO - Agent 1 receiving: <NOT FOUND: space ocean id 41b52c881e>
-2024-06-12 13:20:02,037 - root - INFO - Agent 1 sending: sun crypto id 3305e9c4b3
-2024-06-12 13:20:02,037 - root - INFO - Agent 2 sending: world world id 7ef9a170d9
-2024-06-12 13:20:02,037 - root - INFO - Agent 2 receiving: <NOT FOUND: sun crypto id 3305e9c4b3>
-2024-06-12 13:20:02,037 - root - INFO - Agent 1 receiving: <NOT FOUND: world world id 7ef9a170d9>
-2024-06-12 13:20:04,053 - root - INFO - Agent 1 sending: universe hello id daea7bbcc6
-2024-06-12 13:20:04,053 - root - INFO - Agent 2 sending: crypto space id ea290a7d02
-2024-06-12 13:20:04,053 - root - INFO - Agent 2 receiving: <FOUND: universe hello id daea7bbcc6>
-2024-06-12 13:20:04,053 - root - INFO - Agent 1 receiving: <NOT FOUND: crypto space id ea290a7d02>
+2024-06-12 13:42:07,467 - root - INFO - Agent 1 sending: [38;2;201;12;109mmoon sky id 5905ea90ec[0m
+2024-06-12 13:42:07,467 - root - INFO - Agent 2 sending: [38;2;69;118;125mcrypto crypto id 2666715f22[0m
+2024-06-12 13:42:07,467 - root - INFO - Agent 2 receiving: <NOT FOUND: [38;2;201;12;109mmoon sky id 5905ea90ec[0m>
+2024-06-12 13:42:07,467 - root - INFO - Agent 1 receiving: <NOT FOUND: [38;2;69;118;125mcrypto crypto id 2666715f22[0m>

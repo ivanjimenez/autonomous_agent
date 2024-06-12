@@ -18,7 +18,7 @@
 * Two agents are running in asynchronous tasks.
 *
 
-````bash
+```bash
 2024-06-12 13:01:50 INFO     Agent 1 sending: ocean ocean id e76dad6fb0
 2024-06-12 13:01:50 INFO     Agent 2 sending: ocean ocean id 34f096c2b3
 2024-06-12 13:01:50 INFO     Agent 2 receiving: <NOT FOUND: ocean ocean id e76dad6fb0>

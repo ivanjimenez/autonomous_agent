@@ -9,12 +9,12 @@
 - Each module has an implementation of an agent, handler or behaviour given in the current challenge.
 - The architecture to run and manage agents is based on asyncrhounous queues (asyncio.queue) and tasks (asyncio).
 - Not threads or multiprocesses are used, but these options could be used in the future to take advantage of multicore/multiprocess arquitectures. 
-- `simple_agent.py`
+- `simple_agent.py` works with the AbstractClasses to decouple any implementation. 
 - `main.py` is the main point to run the application. I think there are comments in each module but I would make some explanations in RUN section
 
 ### RUN
 
-* Just execute main.py: 'python main.py' (a console output is provided below)
+* Just execute main.py: `python main.py` (a console output is provided below)
 * Two agents are running in asynchronous tasks.
 *
 
@@ -48,6 +48,59 @@ Callback executed! Updated behaviour and handle.
 2024-06-12 13:02:03 INFO     Agent 2 sending: Manchester Milan id 608775691b
 ```
 
+### Tests
+
+- Test framework used for testing: `unittest`
+- For some issues (needing of improvements), please run each test separately as follows:
+    
+    * Unit Test both agents: there are other tests in test folder to check behaviour and handle it is necessary. 
+    ```
+    python -m unittest .\tests\test_agents.py                
+    ######### Starting Unit Tests
+    Configured Agent1 and Agent2.
+    .Agent1 behaviour configured
+    .Agent2 behaviour configured
+    .Agent1 handle configured
+    .Agent1 handle configured
+    .
+    ----------------------------------------------------------------------
+    Ran 5 tests in 0.006s
+
+    OK
+    ```
+---
+    * Integration Test:
+    ```
+    $ python -m unittest .\tests\test_integration.py         
+    #### Starting TEST AGENTS INTEGRATION
+
+    >>> Tests Results
+    FOUND count: 1
+    NOT FOUND count: 5
+
+                >>> The previous stdout is recorded in the following stdouput <<<
+                >>> Just compare the resultos above and below                 <<<
+                >>> Integration Tests improvements in future versions :-> !!  <<<
+
+    2024-06-12 13:20:00,024 - root - INFO - Agent 1 sending: ocean ocean id 5803e91e01
+    2024-06-12 13:20:00,024 - root - INFO - Agent 2 sending: space ocean id 41b52c881e
+    2024-06-12 13:20:00,025 - root - INFO - Agent 2 receiving: <NOT FOUND: ocean ocean id 5803e91e01>
+    2024-06-12 13:20:00,025 - root - INFO - Agent 1 receiving: <NOT FOUND: space ocean id 41b52c881e>
+    2024-06-12 13:20:02,037 - root - INFO - Agent 1 sending: sun crypto id 3305e9c4b3
+    2024-06-12 13:20:02,037 - root - INFO - Agent 2 sending: world world id 7ef9a170d9
+    2024-06-12 13:20:02,037 - root - INFO - Agent 2 receiving: <NOT FOUND: sun crypto id 3305e9c4b3>
+    2024-06-12 13:20:02,037 - root - INFO - Agent 1 receiving: <NOT FOUND: world world id 7ef9a170d9>
+    2024-06-12 13:20:04,053 - root - INFO - Agent 1 sending: universe hello id daea7bbcc6
+    2024-06-12 13:20:04,053 - root - INFO - Agent 2 sending: crypto space id ea290a7d02
+    2024-06-12 13:20:04,053 - root - INFO - Agent 2 receiving: <FOUND: universe hello id daea7bbcc6>
+    2024-06-12 13:20:04,053 - root - INFO - Agent 1 receiving: <NOT FOUND: crypto space id ea290a7d02>
+
+    .
+    ----------------------------------------------------------------------
+    Ran 2 tests in 5.036s
+
+    OK
+    ```
 
 ### Improvements
 

@@ -1,12 +1,12 @@
-2024-06-12 12:39:35,510 - root - INFO - Agent 1 sending: moon crypto id 80ca47d216
-2024-06-12 12:39:35,510 - root - INFO - Agent 2 sending: moon world id e9bb2ccb02
-2024-06-12 12:39:35,510 - root - INFO - Agent 2 receiving: <NOT FOUND: moon crypto id 80ca47d216>
-2024-06-12 12:39:35,510 - root - INFO - Agent 1 receiving: <NOT FOUND: moon world id e9bb2ccb02>
-2024-06-12 12:39:37,517 - root - INFO - Agent 1 sending: crypto moon id 888e908723
-2024-06-12 12:39:37,517 - root - INFO - Agent 2 sending: space hello id 661c7a2402
-2024-06-12 12:39:37,517 - root - INFO - Agent 2 receiving: <NOT FOUND: crypto moon id 888e908723>
-2024-06-12 12:39:37,517 - root - INFO - Agent 1 receiving: <FOUND: space hello id 661c7a2402>
-2024-06-12 12:39:39,524 - root - INFO - Agent 1 sending: hello sky id 423fca1da5
-2024-06-12 12:39:39,524 - root - INFO - Agent 2 sending: sun moon id d33316294e
-2024-06-12 12:39:39,524 - root - INFO - Agent 2 receiving: <FOUND: hello sky id 423fca1da5>
-2024-06-12 12:39:39,524 - root - INFO - Agent 1 receiving: <NOT FOUND: sun moon id d33316294e>
+2024-06-12 13:20:00,024 - root - INFO - Agent 1 sending: ocean ocean id 5803e91e01
+2024-06-12 13:20:00,024 - root - INFO - Agent 2 sending: space ocean id 41b52c881e
+2024-06-12 13:20:00,025 - root - INFO - Agent 2 receiving: <NOT FOUND: ocean ocean id 5803e91e01>
+2024-06-12 13:20:00,025 - root - INFO - Agent 1 receiving: <NOT FOUND: space ocean id 41b52c881e>
+2024-06-12 13:20:02,037 - root - INFO - Agent 1 sending: sun crypto id 3305e9c4b3
+2024-06-12 13:20:02,037 - root - INFO - Agent 2 sending: world world id 7ef9a170d9
+2024-06-12 13:20:02,037 - root - INFO - Agent 2 receiving: <NOT FOUND: sun crypto id 3305e9c4b3>
+2024-06-12 13:20:02,037 - root - INFO - Agent 1 receiving: <NOT FOUND: world world id 7ef9a170d9>
+2024-06-12 13:20:04,053 - root - INFO - Agent 1 sending: universe hello id daea7bbcc6
+2024-06-12 13:20:04,053 - root - INFO - Agent 2 sending: crypto space id ea290a7d02
+2024-06-12 13:20:04,053 - root - INFO - Agent 2 receiving: <FOUND: universe hello id daea7bbcc6>
+2024-06-12 13:20:04,053 - root - INFO - Agent 1 receiving: <NOT FOUND: crypto space id ea290a7d02>

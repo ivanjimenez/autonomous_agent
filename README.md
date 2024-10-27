@@ -3,7 +3,7 @@
 ### Assumptions and decisions
 
 - The code is decoupled in agent, behaviours and handlers modules with its respectives Interfaces/Abstract clases
-- Each module has an implementation of an agent, handler or behaviour given in the current challenge.
+- Each module has an implementation of an agent, handler or behaviour given.
 - The architecture to run and manage agents is based on asynchronous queues (asyncio.queue) and tasks (asyncio).
 - Not threads or multiprocesses are used, but these options could be used in the future to take advantage of multicore/multiprocess arquitectures. 
 - `simple_agent.py` works with the AbstractClasses to decouple any implementation. 

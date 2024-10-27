@@ -1,7 +1,4 @@
-# Autonomous Agent Valory X-Y-Z Challenge
-
-# Author/Candidate: Iván Jiménez Utiel
-
+# Autonomous Agent 
 
 ### Assumptions and decisions
 

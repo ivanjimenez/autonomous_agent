@@ -1,10 +1,5 @@
 # Autonomous Agent Valory X-Y-Z Challenge
 
-# Author/Candidate: Iván Jiménez Utiel
-# PR Created 
-# Reviewers: dvilelaf - angrybayblade - dagacha
-
-
 ### Assumptions and decisions
 
 - The code is decoupled in agent, behaviours and handlers modules with its respectives Interfaces/Abstract clases

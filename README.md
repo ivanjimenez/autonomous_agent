@@ -1,4 +1,4 @@
-# Autonomous Agent Valory X-Y-Z Challenge
+# Autonomous Agent 
 
 ### Assumptions and decisions
 
